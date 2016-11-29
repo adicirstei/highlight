@@ -1,0 +1,7 @@
+{
+  "projFile": "./highlighter.fsx",
+  "sourceMaps": true,
+  "rollup": {
+    "dest": "./js/bundle.js"
+  }
+}

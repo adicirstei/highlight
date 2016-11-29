@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "dependencies": {
+    "fable-core": "^0.7.9"
+  }
+}
