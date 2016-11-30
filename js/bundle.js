@@ -14,6 +14,10 @@ var fableGlobal = function () {
     }
     return globalObj.__FABLE_CORE__;
 }();
+function setType(fullName, cons) {
+    fableGlobal.types.set(fullName, cons);
+}
+
 var _Symbol = fableGlobal.symbols;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -70,13 +74,6 @@ function GenericParam(name) {
     return new NonDeclaredType("GenericParam", name);
 }
 
-function declare(cons) {
-    var info = cons.prototype[_Symbol.reflection];
-    if (typeof info === "function") {
-        var type = info().type;
-        if (typeof type === "string") fableGlobal.types.set(type, cons);
-    }
-}
 
 /**
  * Checks if this a function constructor extending another with generic info.
@@ -1145,7 +1142,7 @@ var Result = function () {
 
   return Result;
 }();
-declare(Result);
+setType("Parser.Result", Result);
 var Parser = function () {
   function Parser(caseName, fields) {
     _classCallCheck$5(this, Parser);
@@ -1169,7 +1166,7 @@ var Parser = function () {
 
   return Parser;
 }();
-declare(Parser);
+setType("Parser.Parser", Parser);
 function satisfy(pred) {
   var innerFn = function innerFn(str) {
     return isNullOrEmpty(str) ? new Result("Failure", ["No more input"]) : function () {
@@ -1488,7 +1485,7 @@ var Token = function () {
 
   return Token;
 }();
-declare(Token);
+setType("Lexer.Token", Token);
 var lcBool = op_LessBarGreater()(pstring("true"))(pstring("false"));
 var ucBool = op_LessBarGreater()(pstring("True"))(pstring("False"));
 var pnull = pstring("null");

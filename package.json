@@ -2,5 +2,11 @@
   "private": true,
   "dependencies": {
     "fable-core": "^0.7.9"
+  },
+  "devDependencies": {
+    "fable-compiler": "^0.7.16"
+  },
+  "scripts": {
+    "compile": "fable"
   }
 }
